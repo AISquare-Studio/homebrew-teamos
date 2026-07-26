@@ -3,7 +3,13 @@
 # Usage: curl -fsSL https://raw.githubusercontent.com/AISquare-Studio/homebrew-teamos/main/install.sh | bash
 set -euo pipefail
 
-APP="Team OS"
+# The bundle name INSIDE the DMG, which is what every path below is built from.
+# It is "TeamSquare.app", not "Team OS.app" - the cask in this same repo says
+# app "TeamSquare.app". While these disagreed, this script downloaded the DMG,
+# failed the bundle check below and exited 1, so the documented one-liner was
+# dead on every machine (#141). The mismatch also made the xattr quarantine
+# clear a silent no-op against a path that does not exist.
+APP="TeamSquare"
 REPO="AISquare-Studio/homebrew-teamos"
 URL="https://github.com/${REPO}/releases/latest/download/Team-OS-macos-arm64.dmg"
 
